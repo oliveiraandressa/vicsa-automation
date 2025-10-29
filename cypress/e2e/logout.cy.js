@@ -7,7 +7,7 @@
  *
  * Ambiente: usa Cypress.env('BASE_URL') ou Cypress.config('baseUrl') como fallback.
  *
- * Data: 29-10-2025
+ * Data: 29/10/2025
  * Autor: QA Team
  */
 

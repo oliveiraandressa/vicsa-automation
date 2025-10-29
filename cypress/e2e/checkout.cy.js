@@ -7,7 +7,7 @@
  * Pré-condições: usuário em cypress/fixtures/users.json (standard_user) e catálogo com itens.
  * Ambiente: 
  *
- * Data: 29-10-2025
+ * Data: 29/10/2025
  * Autor: QA Team
  */
 
