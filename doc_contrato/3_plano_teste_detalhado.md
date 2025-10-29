@@ -65,14 +65,14 @@ então a mensagem apropriada por campo deverá ser exibida (ex.: "Username is re
 ### 🔹 FLX-002 – Navegação e Exibição de Produtos  
 **Tipo de Fluxo:** Intermediário  
 **Objetivo:** Verificar carregamento correto do catálogo e navegação para detalhe.  
-**Pré-condições:** Catálogo populado em staging.
+**Pré-condições:** Catálogo populado em staging, estar logado.
 
-TST-005 - Listagem de produtos  
+**TST-005 - Listagem de produtos**  
 Dado que o usuário acessa /inventory.html  
 quando a página terminar de carregar  
-então os cards de produto devem mostrar imagem, nome e preço; não deve haver erros JS críticos
+então os cards de produto devem mostrar imagem, nome e preço; 
 
-TST-006 - Detalhe do produto  
+**TST-006 - Detalhe do produto**
 Dado que existe um produto na listagem  
 quando o usuário clicar no card do produto  
 então abrirá a página de detalhe contendo descrição, preço e botão "Add to cart"
@@ -87,17 +87,17 @@ então abrirá a página de detalhe contendo descrição, preço e botão "Add t
 **Objetivo:** Garantir consistência do carrinho e cálculos de subtotal/total.  
 **Pré-condições:** Usuário autenticado; catálogo com itens.
 
-TST-007 - Adicionar item ao carrinho  
+**TST-007 - Adicionar item ao carrinho**    
 Dado que o usuário está logado em /inventory.html  
 quando clicar em "Add to cart" em um produto  
 então o contador do carrinho deve incrementar e o item deve aparecer em /cart.html
 
-TST-008 - Atualizar quantidade / Remover item  
+**TST-008 - Atualizar quantidade / Remover item**  
 Dado que o carrinho contém itens  
 quando atualizar a quantidade de um item ou remover um item  
 então subtotais e total devem ser recalculados corretamente e o contador ajustado
 
-TST-009 - Persistência do carrinho entre sessões  
+**TST-009 - Persistência do carrinho entre sessões**
 Dado que o usuário adicionou itens ao carrinho  
 quando recarregar a página ou encerrar sessão e logar novamente (conforme política da aplicação)  
 então o estado do carrinho deve persistir conforme regra definida
