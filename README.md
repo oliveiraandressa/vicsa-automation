@@ -27,6 +27,27 @@ Este portfólio demonstra **como podemos criar testes prontos para uso, adaptáv
 
 ---
 
+## Organização do repositório
+````
+ cypress/
+   ├─ e2e/
+   │   ├─ login.cy.js
+   │   ├─ produtos.cy.js
+   │   ├─ carrinho.cy.js
+   │   ├─ checkout.cy.js
+   │   ├─ logout.cy.js
+   │   └─ ui_responsividade.cy.js
+   └─ support/
+       └─ commands.js  (funções reutilizáveis)
+ doc_contrato/
+   ├─ 1_mapeamento_fluxos.md
+   ├─ 2_plano_teste_inicial.md
+   ├─ 3_plano_teste_detalhados.md
+   ├─ 4_contrato.md
+````
+
+---
+
 ## Como rodar os testes dessa demonstração
 > Foram usados sites públicos para demonstração, evidenciando **a aplicação prática e imediata da automação em sistemas reais**.
 
