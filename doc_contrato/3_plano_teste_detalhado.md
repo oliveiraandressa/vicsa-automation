@@ -102,8 +102,7 @@ Dado que o usuário adicionou itens ao carrinho
 quando recarregar a página ou encerrar sessão e logar novamente (conforme política da aplicação)  
 então o estado do carrinho deve persistir conforme regra definida
 
-#### Observações
-- Incluir casos com múltiplos itens e limites de quantidade; capturar evidências dos cálculos.
+
 
 ---
 
