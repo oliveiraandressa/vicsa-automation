@@ -102,8 +102,6 @@ Dado que o usuário adicionou itens ao carrinho
 quando recarregar a página ou encerrar sessão e logar novamente (conforme política da aplicação)  
 então o estado do carrinho deve persistir conforme regra definida
 
-
-
 ---
 
 ### 🔹 FLX-004 — Checkout e Finalização de Compra  
@@ -111,23 +109,23 @@ então o estado do carrinho deve persistir conforme regra definida
 **Objetivo:** Validar preenchimento, cálculos e confirmação do pedido.  
 **Pré-condições:** Carrinho com ao menos 1 item; sandbox de pagamento quando aplicável.
 
-TST-010 - Checkout com dados válidos  
+**TST-010 - Checkout com dados válidos**   
 Dado que o carrinho possui itens e o usuário está autenticado  
 quando preencher First Name, Last Name e Postal Code e seguir os passos do checkout  
 então a página de confirmação (/checkout-complete.html) deverá exibir número/ID do pedido e totais corretos
 
-TST-011 - Validações de formulário no checkout  
+**TST-011 - Validações de formulário no checkout**  
 Dado que o usuário deixa campos obrigatórios vazios  
 quando tentar avançar no checkout  
 então cada campo obrigatório deverá apresentar mensagem de erro específica
 
-TST-012 - Falha de pagamento simulada  
+**TST-012 - Falha de pagamento simulada**  
 Dado que o serviço de pagamento retorna erro no sandbox  
 quando confirmar pagamento  
 então a aplicação deverá exibir mensagem de falha e não gerar pedido; estado do pedido deve permanecer consistente
 
 #### Observações
-- Mockar/isolaar chamadas externas quando possível para automação determinística; registrar requests/responses se aplicável.
+- Não é possivel simular um erro no checkout e no pagamento por que, por ser um e-commerce de demonstração, o site não faz requisições.
 
 ---
 
@@ -136,12 +134,12 @@ então a aplicação deverá exibir mensagem de falha e não gerar pedido; estad
 **Objetivo:** Garantir encerramento de sessão e proteção de rotas.  
 **Pré-condições:** Usuário autenticado.
 
-TST-013 - Logout funcional  
+**TST-013 - Logout funcional**  
 Dado que o usuário está logado  
 quando clicar em "Logout" no menu  
 então será redirecionado para a tela de login e acesso a páginas restritas será negado
 
-TST-014 - Acesso direto sem sessão  
+**TST-014 - Acesso direto sem sessão**  
 Dado que não há sessão ativa  
 quando acessar diretamente /inventory.html ou /checkout-step-one.html  
 então a aplicação deverá redirecionar para login ou retornar 401 conforme política
@@ -153,12 +151,12 @@ então a aplicação deverá redirecionar para login ou retornar 401 conforme po
 **Objetivo:** Validar filtros e ordenações aplicadas à listagem.  
 **Pré-condições:** Catálogo variado.
 
-TST-015 - Filtrar por critério (categoria/faixa de preço)  
+**TST-015 - Filtrar por critério (categoria/faixa de preço)**  
 Dado que existem produtos com propriedades variadas  
 quando aplicar filtro  
 então somente produtos que atendam ao critério deverão ser exibidos
 
-TST-016 - Ordenação (price/name)  
+**TST-016 - Ordenação (price/name)**  
 Dado que a listagem está visível  
 quando aplicar ordenação (ex.: price low→high)  
 então a sequência dos itens deverá refletir o critério selecionado
@@ -169,7 +167,7 @@ então a sequência dos itens deverá refletir o critério selecionado
 **Tipo de Fluxo:** Manual com suporte automatizado (screenshots)  
 **Objetivo:** Verificar apresentação e usabilidade em breakpoints críticos.
 
-TST-017 - Checkpoints visuais (screenshots)  
+**TST-017 - Checkpoints visuais (screenshots)**
 Dado que a aplicação está disponível em staging  
 quando capturar screenshots em 320px, 768px e 1024px das páginas críticas (login, produtos, cart, checkout)  
 então não deve haver quebras visuais críticas e elementos essenciais devem permanecer acessíveis
