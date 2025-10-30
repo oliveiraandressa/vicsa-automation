@@ -9,8 +9,7 @@
  * Autor: QA Team
  */
 
-const urls = require('../support/urls');
-const base = Cypress.env('BASE_URL') || urls?.BASE_URL || Cypress.config('baseUrl') || 'https://www.saucedemo.com';
+const base = 'https://www.saucedemo.com';
 
 function parsePrice(text) {
   if (!text) return 0;
@@ -24,7 +23,7 @@ describe('FLX-006 - Filtragem e Ordenação de Produtos', () => {
 
   beforeEach(() => {
     // visitar a raiz e fazer login (fallback caso cy.login não exista)
-    cy.visit(base + '/', { failOnStatusCode: false });
+    cy.visit(base , { failOnStatusCode: false });
 
     cy.login()
 
