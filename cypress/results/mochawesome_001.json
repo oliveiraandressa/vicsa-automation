@@ -1,0 +1,143 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-10-31T13:34:33.088Z",
+    "end": "2025-10-31T13:34:40.603Z",
+    "duration": 7515,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "1bad2aea-1e95-4356-a2a3-b570bd919bfc",
+      "title": "",
+      "fullFile": "cypress\\e2e\\checkout.cy.js",
+      "file": "cypress\\e2e\\checkout.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5f798a50-35a0-49f9-b746-62a7db13d9d9",
+          "title": "FLX-004 - Checkout e Finalização de Compra",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TST-010 - Checkout com dados válidos",
+              "fullTitle": "FLX-004 - Checkout e Finalização de Compra TST-010 - Checkout com dados válidos",
+              "timedOut": null,
+              "duration": 3715,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/**\n * Dado que o carrinho possui itens e o usuário está autenticado \n * quando preencher First Name, Last Name e Postal Code e seguir os passos do checkout \n * então a página de confirmação (/checkout-complete.html) deverá exibir número/ID do pedido e totais corretos\n */\n// adicionar um item ao carrinho\ncy.get('.inventory_item').first().within(() => {\n  cy.get('button').contains(/add to cart/i).click();\n});\n// acessar carrinho\ncy.get('.shopping_cart_link').click();\ncy.url().should('include', '/cart.html');\ncy.get('.cart_item').should('have.length.greaterThan', 0);\n// iniciar checkout\ncy.get('button').contains(/checkout/i).click();\ncy.url().should('include', '/checkout-step-one.html');\n// preencher dados válidos e continuar\ncy.get('#first-name').clear().type('Teste');\ncy.get('#last-name').clear().type('QA');\ncy.get('#postal-code').clear().type('12345');\ncy.get('input[id=\"continue\"], button').contains(/continue/i).click();\n// confirmar itens e finalizar\ncy.url().should('include', '/checkout-step-two.html');\ncy.get('button').contains(/finish/i).click();\n// validação final: página de confirmação\ncy.url({\n  timeout: 10000\n}).should('include', '/checkout-complete.html');\n// selector usado no SauceDemo real; ajuste se diferente\ncy.get('.complete-header, .checkout_complete_container').should('be.visible').and($el => {\n  // esperar texto de confirmação (ex.: THANK YOU)\n  expect($el.text().toLowerCase()).to.match(/thank you|order/i);\n});",
+              "err": {},
+              "uuid": "1edc0589-dd14-4a51-8475-777637139a7f",
+              "parentUUID": "5f798a50-35a0-49f9-b746-62a7db13d9d9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TST-011 - Validações de formulário no checkout",
+              "fullTitle": "FLX-004 - Checkout e Finalização de Compra TST-011 - Validações de formulário no checkout",
+              "timedOut": null,
+              "duration": 1292,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/**\n *  Não é possivel simular um erro no checkout por que, por ser um e-commerce de demonstração, o site não faz requisições.\n */",
+              "err": {},
+              "uuid": "7cc25bdd-47c0-413c-adca-dcaa98070f63",
+              "parentUUID": "5f798a50-35a0-49f9-b746-62a7db13d9d9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TST-012 - Falha de pagamento simulada (mock/simulação)",
+              "fullTitle": "FLX-004 - Checkout e Finalização de Compra TST-012 - Falha de pagamento simulada (mock/simulação)",
+              "timedOut": null,
+              "duration": 1094,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/**\n*  Não é possivel simular um erro no pagamento por que, por ser um e-commerce de demonstração, o site não faz requisições.\n*/",
+              "err": {},
+              "uuid": "56ca7c6e-2d90-49d3-9087-5358111d7926",
+              "parentUUID": "5f798a50-35a0-49f9-b746-62a7db13d9d9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1edc0589-dd14-4a51-8475-777637139a7f",
+            "7cc25bdd-47c0-413c-adca-dcaa98070f63",
+            "56ca7c6e-2d90-49d3-9087-5358111d7926"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6101,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

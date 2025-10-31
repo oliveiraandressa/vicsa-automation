@@ -1,8 +1,18 @@
 {
+  "name": "vicsa-automation",
+  "version": "1.0.0",
+  "scripts": {
+    "test:ci": "npx cypress run --reporter mochawesome --reporter-options \"reportDir=cypress/results,overwrite=false,html=false,json=true\"",
+    "report:merge": "npx mochawesome-merge \"cypress/results/*.json\" > cypress/results/mochawesome.json",
+    "report:generate": "npx mochawesome-report-generator cypress/results/mochawesome.json -f mochawesome-report -o cypress/results/mochawesome-report",
+    "test:report": "npm run test:ci && npm run report:merge && npm run report:generate"
+  },
   "dependencies": {
     "cypress": "^15.5.0"
   },
   "devDependencies": {
-    "mochawesome": "^7.1.4"
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.3.0"
   }
 }

@@ -1,0 +1,181 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-10-31T13:34:50.104Z",
+    "end": "2025-10-31T13:34:55.866Z",
+    "duration": 5762,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "5f5770a2-505c-48cb-8eb9-36c633cd68dd",
+      "title": "",
+      "fullFile": "cypress\\e2e\\login.cy.js",
+      "file": "cypress\\e2e\\login.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "57ad4167-c5ea-431a-90b2-a659206ef352",
+          "title": "FLX-001 - Login e Autenticação",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TST-001 - Login válido",
+              "fullTitle": "FLX-001 - Login e Autenticação TST-001 - Login válido",
+              "timedOut": null,
+              "duration": 1201,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/**\n * Dado que o usuário está em /login com credenciais válidas (standard_user / secret_sauce)  \n * Quando preencher usuário e senha e clicar em \"Login\"\n * Então será redirecionado para /inventory.html e a lista de produtos (.inventory_list) será visível\n */\ncy.loginAs('standard_user');\ncy.url().should('include', '/inventory.html');\ncy.get('.inventory_list').should('be.visible');",
+              "err": {},
+              "uuid": "ab747d04-39ed-4c3d-8355-4052e593d5e6",
+              "parentUUID": "57ad4167-c5ea-431a-90b2-a659206ef352",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TST-002 - Login inválido",
+              "fullTitle": "FLX-001 - Login e Autenticação TST-002 - Login inválido",
+              "timedOut": null,
+              "duration": 904,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/**\n * Dado que o usuário informa credenciais inválidas\n * Quando submeter o formulário de login\n * Então uma mensagem de erro clara deverá ser exibida e o acesso negado\n */\ncy.get('#user-name').type('standard_user');\ncy.get('#password').type('wrong_pass');\ncy.get('#login-button').click();\ncy.get('[data-test=\"error\"]').should('contain', 'Epic sadface');",
+              "err": {},
+              "uuid": "e96d571d-8334-4b39-8ebf-517c2d3a05b5",
+              "parentUUID": "57ad4167-c5ea-431a-90b2-a659206ef352",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": " Usuário bloqueado ( TST-003)",
+              "fullTitle": "FLX-001 - Login e Autenticação  Usuário bloqueado ( TST-003)",
+              "timedOut": null,
+              "duration": 974,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/**\n * - Dado que o usuário é locked_out_user\n * - Quando tentar efetuar login\n * - Então será exibida mensagem indicando que o usuário está bloqueado\n */\ncy.loginAs('locked_out_user');\ncy.get('[data-test=\"error\"]').should('contain', 'locked out');",
+              "err": {},
+              "uuid": "64b465f8-23fa-437e-924f-a8d2751c1c56",
+              "parentUUID": "57ad4167-c5ea-431a-90b2-a659206ef352",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TST-004 - Campos obrigatórios (usuário/senha vazios)",
+              "fullTitle": "FLX-001 - Login e Autenticação TST-004 - Campos obrigatórios (usuário/senha vazios)",
+              "timedOut": null,
+              "duration": 177,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/**\n * Dado que um ou ambos os campos estão vazios  \n * Quando submeter o formulário\n * Então a mensagem apropriada por campo deverá ser exibida (ex.: \"Username is required\", \"Password is required\")\n */\ncy.get('#login-button').click();\ncy.get('[data-test=\"error\"]').should('exist').and('contain', 'Epic sadface');",
+              "err": {},
+              "uuid": "1c673284-7aa6-4168-bfd8-48d4ac364f00",
+              "parentUUID": "57ad4167-c5ea-431a-90b2-a659206ef352",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Injeção de script não deve executar nem permitir acesso (teste XSS básico)",
+              "fullTitle": "FLX-001 - Login e Autenticação Injeção de script não deve executar nem permitir acesso (teste XSS básico)",
+              "timedOut": null,
+              "duration": 1144,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const payload = \"<script>alert('xss')</script>\";\n// falhar se algum alert for executado (sinal de XSS)\ncy.on('window:alert', () => {\n  throw new Error('Alerta executado — possível XSS');\n});\ncy.get('#user-name').clear().type(payload);\ncy.get('#password').clear().type('any_password');\ncy.get('#login-button').click();\n// não deve redirecionar para inventory\ncy.url().should('not.include', '/inventory.html');\ncy.get('[data-test=\"error\"]').should('exist');",
+              "err": {},
+              "uuid": "723bfae9-e817-490e-8574-ba1330ba747d",
+              "parentUUID": "57ad4167-c5ea-431a-90b2-a659206ef352",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ab747d04-39ed-4c3d-8355-4052e593d5e6",
+            "e96d571d-8334-4b39-8ebf-517c2d3a05b5",
+            "64b465f8-23fa-437e-924f-a8d2751c1c56",
+            "1c673284-7aa6-4168-bfd8-48d4ac364f00",
+            "723bfae9-e817-490e-8574-ba1330ba747d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4400,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

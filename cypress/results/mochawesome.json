@@ -1,0 +1,143 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-10-31T13:34:21.783Z",
+    "end": "2025-10-31T13:34:30.930Z",
+    "duration": 9147,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "29655ee8-6380-4028-a236-b9400218a7bd",
+      "title": "",
+      "fullFile": "cypress\\e2e\\carrinho.cy.js",
+      "file": "cypress\\e2e\\carrinho.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "08228057-2a17-45cb-8165-90b715b9be42",
+          "title": "FLX-003 - Adicionar e Remover Itens do Carrinho",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TST-007 - Adicionar item ao carrinho: contador e presença em /cart.html",
+              "fullTitle": "FLX-003 - Adicionar e Remover Itens do Carrinho TST-007 - Adicionar item ao carrinho: contador e presença em /cart.html",
+              "timedOut": null,
+              "duration": 2633,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.inventory_item').first().within(() => {\n  cy.get('button').contains(/add to cart/i).click();\n});\ncy.get('.shopping_cart_badge').should('contain', '1');\ncy.get('.shopping_cart_link').click();\ncy.url().should('include', '/cart.html');\ncy.get('.cart_item').should('have.length.greaterThan', 0);",
+              "err": {},
+              "uuid": "a31f8f5a-d7bc-41bd-abae-d0a8b6184a9d",
+              "parentUUID": "08228057-2a17-45cb-8165-90b715b9be42",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TST-008 - Atualizar quantidade / Remover item: remover item e recalcular contagem",
+              "fullTitle": "FLX-003 - Adicionar e Remover Itens do Carrinho TST-008 - Atualizar quantidade / Remover item: remover item e recalcular contagem",
+              "timedOut": null,
+              "duration": 1921,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// garantir items\ncy.visit(base + '/inventory.html', {\n  failOnStatusCode: false\n});\ncy.get('.inventory_item').eq(0).within(() => {\n  cy.get('button').contains(/add to cart/i).click();\n});\ncy.get('.inventory_item').eq(1).within(() => {\n  cy.get('button').contains(/add to cart/i).click();\n});\ncy.get('.shopping_cart_badge').should('contain', '2');\ncy.get('.shopping_cart_link').click();\ncy.url().should('include', '/cart.html');\ncy.get('.cart_item').should('have.length', 2);\ncy.get('.cart_item').first().within(() => {\n  cy.get('button').contains(/remove/i).click();\n});\ncy.get('.shopping_cart_badge').should('contain', '1');\ncy.get('.cart_item').should('have.length', 1);",
+              "err": {},
+              "uuid": "9112578c-ffe3-41be-9a0c-ee048f0086b4",
+              "parentUUID": "08228057-2a17-45cb-8165-90b715b9be42",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TST-009 - Persistência do carrinho: reload mantém itens; logout limpa sessão (conforme aplicação)",
+              "fullTitle": "FLX-003 - Adicionar e Remover Itens do Carrinho TST-009 - Persistência do carrinho: reload mantém itens; logout limpa sessão (conforme aplicação)",
+              "timedOut": null,
+              "duration": 2691,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(base + '/inventory.html', {\n  failOnStatusCode: false\n});\ncy.get('.inventory_item').first().within(() => {\n  cy.get('button').contains(/add to cart/i).click();\n});\ncy.get('.shopping_cart_badge').should('contain', '1');\ncy.reload();\ncy.get('.shopping_cart_badge').should('contain', '1');\ncy.get('.shopping_cart_link').click();\ncy.get('.cart_item').should('have.length.greaterThan', 0);\n// logout via menu\ncy.get('#react-burger-menu-btn').click();\ncy.get('#logout_sidebar_link').should('be.visible').click();\n// reconectar e validar comportamento do carrinho (aplicar regra da app)\ncy.fixture('users').then(users => {\n  var _users$standard_user3, _users$standard_user4;\n  const user = (users === null || users === void 0 || (_users$standard_user3 = users.standard_user) === null || _users$standard_user3 === void 0 ? void 0 : _users$standard_user3.username) || Cypress.env('USERNAME') || 'standard_user';\n  const pass = (users === null || users === void 0 || (_users$standard_user4 = users.standard_user) === null || _users$standard_user4 === void 0 ? void 0 : _users$standard_user4.password) || Cypress.env('PASSWORD') || 'secret_sauce';\n  cy.get('#user-name').clear().type(user);\n  cy.get('#password').clear().type(pass, {\n    log: false\n  });\n  cy.get('#login-button').click();\n});\n// verificar se carrinho está no estado esperado \ncy.get('body').then($body => {\n  if ($body.find('.shopping_cart_badge').length) {\n    cy.get('.shopping_cart_badge').should('exist');\n  } else {\n    cy.get('.shopping_cart_link').click();\n    cy.get('.cart_item').should('have.length', 1);\n  }\n});",
+              "err": {},
+              "uuid": "907a1620-5792-4540-9bf3-5f13412ef518",
+              "parentUUID": "08228057-2a17-45cb-8165-90b715b9be42",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a31f8f5a-d7bc-41bd-abae-d0a8b6184a9d",
+            "9112578c-ffe3-41be-9a0c-ee048f0086b4",
+            "907a1620-5792-4540-9bf3-5f13412ef518"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7245,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

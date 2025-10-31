@@ -1,0 +1,124 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-10-31T13:34:57.644Z",
+    "end": "2025-10-31T13:35:03.669Z",
+    "duration": 6025,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "9b974c7e-134b-44ca-b349-347d44f4f245",
+      "title": "",
+      "fullFile": "cypress\\e2e\\logout.cy.js",
+      "file": "cypress\\e2e\\logout.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a4115779-7209-4fcf-aa96-0e36c963c5ed",
+          "title": "FLX-005 - Logout e Segurança de Sessão",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TST-013 - Logout funcional",
+              "fullTitle": "FLX-005 - Logout e Segurança de Sessão TST-013 - Logout funcional",
+              "timedOut": null,
+              "duration": 2709,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/**\n * Dado que o usuário está logado \n * quando clicar em \"Logout\" no menu \n * então será redirecionado para a tela de login e acesso a páginas restritas será negado\n */\n// abrir menu e clicar logout\ncy.get('#react-burger-menu-btn').click();\ncy.get('#logout_sidebar_link').should('be.visible').click();\n// após logout deve voltar para a tela de login (ou exibir form de login)\ncy.get('#login-button', {\n  timeout: 10000\n}).should('be.visible');\n// acessar rota restrita deve redirecionar para login ou exibir o form\ncy.visit(base + '/inventory.html', {\n  failOnStatusCode: false\n});\n// não deve manter acesso; verificar presença do form de login\ncy.get('body').then($body => {\n  expect($body.find('#login-button').length).to.be.greaterThan(0);\n});",
+              "err": {},
+              "uuid": "e68647b4-24b3-4ad0-92d3-57ab2062b57e",
+              "parentUUID": "a4115779-7209-4fcf-aa96-0e36c963c5ed",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TST-014 - Acesso direto sem sessão",
+              "fullTitle": "FLX-005 - Logout e Segurança de Sessão TST-014 - Acesso direto sem sessão",
+              "timedOut": null,
+              "duration": 1572,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/**\n * Dado que não há sessão ativa \n * quando acessar diretamente /inventory.html ou /checkout-step-one.html \n * então a aplicação deverá redirecionar para login ou retornar 401 conforme política\n */\n// primeiro garantir logout (se ainda logado)\ncy.get('body').then($body => {\n  if ($body.find('#react-burger-menu-btn').length) {\n    cy.get('#react-burger-menu-btn').click();\n    if ($body.find('#logout_sidebar_link').length) {\n      cy.get('#logout_sidebar_link').click();\n    }\n  }\n});\n// tentar acessar /inventory.html diretamente (não falhar no status para diagnóstico)\ncy.visit(base + '/inventory.html', {\n  failOnStatusCode: false\n});\n// a aplicação deve impedir acesso: checar presença do formulário de login ou redirecionamento\ncy.get('body', {\n  timeout: 10000\n}).then($body => {\n  // espera que o login form esteja presente\n  expect($body.find('#login-button').length || $body.find('#user-name').length).to.be.greaterThan(0);\n});\n// opcional: garantir que não estamos em /inventory.html\ncy.url().should('not.include', '/inventory.html');",
+              "err": {},
+              "uuid": "30bd040b-2a63-4f00-9e03-f17994d67b79",
+              "parentUUID": "a4115779-7209-4fcf-aa96-0e36c963c5ed",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e68647b4-24b3-4ad0-92d3-57ab2062b57e",
+            "30bd040b-2a63-4f00-9e03-f17994d67b79"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4281,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

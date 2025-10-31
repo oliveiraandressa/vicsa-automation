@@ -1,0 +1,202 @@
+{
+  "stats": {
+    "suites": 4,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-10-31T13:35:12.742Z",
+    "end": "2025-10-31T13:35:22.525Z",
+    "duration": 9783,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "664fc6c6-c55a-4bb2-9c33-b45cecb4cc8f",
+      "title": "",
+      "fullFile": "cypress\\e2e\\ui_responsividade.cy.js",
+      "file": "cypress\\e2e\\ui_responsividade.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "cf3b56aa-9d75-490e-9180-6b6b711ce2d7",
+          "title": "FLX-007 - Responsividade e UI (checkpoints visuais)",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "000bd75a-05a4-4eee-b830-814e4939ec2c",
+              "title": "viewport 320px",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "TST-017 - capture login/products/cart/checkout screenshots @ 320px",
+                  "fullTitle": "FLX-007 - Responsividade e UI (checkpoints visuais) viewport 320px TST-017 - capture login/products/cart/checkout screenshots @ 320px",
+                  "timedOut": null,
+                  "duration": 3921,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "/**\n * Dado que a aplicação está disponível em staging  \n * quando capturar screenshots em 320px, 768px e 1024px das páginas críticas (login, produtos, cart, checkout)  \n * então não deve haver quebras visuais críticas e elementos essenciais devem permanecer acessíveis\n */\n// 1) Login page (unauthenticated)\ncy.visit(base, {\n  failOnStatusCode: false\n});\ncy.get('body', {\n  timeout: 10000\n}).should('exist');\ncy.screenshot(`responsive/${vp.label}-login`, {\n  capture: 'viewport'\n});\n// 2) Ensure logged in and capture products view\ncy.login();\ncy.get('.inventory_list', {\n  timeout: 10000\n}).should('be.visible');\ncy.screenshot(`responsive/${vp.label}-products`, {\n  capture: 'viewport'\n});\n// 3) Add item and capture cart\naddFirstProductToCart();\ncy.get('.shopping_cart_link').click();\ncy.url().should('include', '/cart.html');\ncy.get('.cart_item', {\n  timeout: 10000\n}).should('have.length.greaterThan', 0);\ncy.screenshot(`responsive/${vp.label}-cart`, {\n  capture: 'viewport'\n});\n// 4) Proceed to checkout-step-one and capture\ncy.get('button').contains(/checkout/i).click();\ncy.url().should('include', '/checkout-step-one.html');\ncy.get('#first-name, #last-name, #postal-code', {\n  timeout: 10000\n}).should('exist');\ncy.screenshot(`responsive/${vp.label}-checkout-step-one`, {\n  capture: 'viewport'\n});",
+                  "err": {},
+                  "uuid": "4e82048a-5bae-4062-943c-174aea111c28",
+                  "parentUUID": "000bd75a-05a4-4eee-b830-814e4939ec2c",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "4e82048a-5bae-4062-943c-174aea111c28"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 3921,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "9233de4b-2aec-441e-9299-3d3c8a24ed00",
+              "title": "viewport 768px",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "TST-017 - capture login/products/cart/checkout screenshots @ 768px",
+                  "fullTitle": "FLX-007 - Responsividade e UI (checkpoints visuais) viewport 768px TST-017 - capture login/products/cart/checkout screenshots @ 768px",
+                  "timedOut": null,
+                  "duration": 2236,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "/**\n * Dado que a aplicação está disponível em staging  \n * quando capturar screenshots em 320px, 768px e 1024px das páginas críticas (login, produtos, cart, checkout)  \n * então não deve haver quebras visuais críticas e elementos essenciais devem permanecer acessíveis\n */\n// 1) Login page (unauthenticated)\ncy.visit(base, {\n  failOnStatusCode: false\n});\ncy.get('body', {\n  timeout: 10000\n}).should('exist');\ncy.screenshot(`responsive/${vp.label}-login`, {\n  capture: 'viewport'\n});\n// 2) Ensure logged in and capture products view\ncy.login();\ncy.get('.inventory_list', {\n  timeout: 10000\n}).should('be.visible');\ncy.screenshot(`responsive/${vp.label}-products`, {\n  capture: 'viewport'\n});\n// 3) Add item and capture cart\naddFirstProductToCart();\ncy.get('.shopping_cart_link').click();\ncy.url().should('include', '/cart.html');\ncy.get('.cart_item', {\n  timeout: 10000\n}).should('have.length.greaterThan', 0);\ncy.screenshot(`responsive/${vp.label}-cart`, {\n  capture: 'viewport'\n});\n// 4) Proceed to checkout-step-one and capture\ncy.get('button').contains(/checkout/i).click();\ncy.url().should('include', '/checkout-step-one.html');\ncy.get('#first-name, #last-name, #postal-code', {\n  timeout: 10000\n}).should('exist');\ncy.screenshot(`responsive/${vp.label}-checkout-step-one`, {\n  capture: 'viewport'\n});",
+                  "err": {},
+                  "uuid": "f2f6f78e-26cf-471f-977c-6ec6d3fea91a",
+                  "parentUUID": "9233de4b-2aec-441e-9299-3d3c8a24ed00",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "f2f6f78e-26cf-471f-977c-6ec6d3fea91a"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 2236,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "7108050b-3c58-4b62-b725-be762043d37d",
+              "title": "viewport 1024px",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "TST-017 - capture login/products/cart/checkout screenshots @ 1024px",
+                  "fullTitle": "FLX-007 - Responsividade e UI (checkpoints visuais) viewport 1024px TST-017 - capture login/products/cart/checkout screenshots @ 1024px",
+                  "timedOut": null,
+                  "duration": 2292,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "/**\n * Dado que a aplicação está disponível em staging  \n * quando capturar screenshots em 320px, 768px e 1024px das páginas críticas (login, produtos, cart, checkout)  \n * então não deve haver quebras visuais críticas e elementos essenciais devem permanecer acessíveis\n */\n// 1) Login page (unauthenticated)\ncy.visit(base, {\n  failOnStatusCode: false\n});\ncy.get('body', {\n  timeout: 10000\n}).should('exist');\ncy.screenshot(`responsive/${vp.label}-login`, {\n  capture: 'viewport'\n});\n// 2) Ensure logged in and capture products view\ncy.login();\ncy.get('.inventory_list', {\n  timeout: 10000\n}).should('be.visible');\ncy.screenshot(`responsive/${vp.label}-products`, {\n  capture: 'viewport'\n});\n// 3) Add item and capture cart\naddFirstProductToCart();\ncy.get('.shopping_cart_link').click();\ncy.url().should('include', '/cart.html');\ncy.get('.cart_item', {\n  timeout: 10000\n}).should('have.length.greaterThan', 0);\ncy.screenshot(`responsive/${vp.label}-cart`, {\n  capture: 'viewport'\n});\n// 4) Proceed to checkout-step-one and capture\ncy.get('button').contains(/checkout/i).click();\ncy.url().should('include', '/checkout-step-one.html');\ncy.get('#first-name, #last-name, #postal-code', {\n  timeout: 10000\n}).should('exist');\ncy.screenshot(`responsive/${vp.label}-checkout-step-one`, {\n  capture: 'viewport'\n});",
+                  "err": {},
+                  "uuid": "dc2e7b12-1256-4074-b4f6-d82ab3461f65",
+                  "parentUUID": "7108050b-3c58-4b62-b725-be762043d37d",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "dc2e7b12-1256-4074-b4f6-d82ab3461f65"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 2292,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}
